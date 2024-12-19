@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcrg7uyqekgl7"]
+
+[ext_resource type="Shader" path="res://shaders/004_adding_time/adding_time.gdshader" id="1_ejoc4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5gyar"]
+render_priority = 0
+shader = ExtResource("1_ejoc4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_xljse"]
+material = SubResource("ShaderMaterial_5gyar")
+
+[node name="AddingTime" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xljse")

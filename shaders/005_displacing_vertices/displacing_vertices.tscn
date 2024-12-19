@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://du06a3dwu2yy6"]
+
+[ext_resource type="Shader" path="res://shaders/005_displacing_vertices/displacing_vertices.gdshader" id="1_7mier"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c46ul"]
+render_priority = 0
+shader = ExtResource("1_7mier")
+shader_parameter/waves = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_l7vfg"]
+material = SubResource("ShaderMaterial_c46ul")
+
+[node name="DisplacingVertices" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_l7vfg")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0c1k04qmog56"]
+
+[ext_resource type="Shader" path="res://shaders/000_playground/playground.gdshader" id="1_0fhw0"]
+[ext_resource type="Script" path="res://shaders/000_playground/playground.gd" id="1_08keh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h8cto"]
+render_priority = 0
+shader = ExtResource("1_0fhw0")
+shader_parameter/my_variable = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_6preo"]
+material = SubResource("ShaderMaterial_h8cto")
+
+[node name="Playground" type="Node3D"]
+script = ExtResource("1_08keh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_6preo")

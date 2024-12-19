@@ -1,0 +1,143 @@
+[gd_scene load_steps=17 format=3 uid="uid://xiyknqrsrmws"]
+
+[ext_resource type="PackedScene" uid="uid://dcv8xw0aeturp" path="res://entities/viewer/viewer.tscn" id="1_ann0f"]
+[ext_resource type="PackedScene" uid="uid://bn6vxev7totc8" path="res://entities/plinth/plinth.tscn" id="3_hl5po"]
+[ext_resource type="PackedScene" uid="uid://bm381ddsm6nv3" path="res://shaders/002_change_position/change_position.tscn" id="4_3haq7"]
+[ext_resource type="PackedScene" uid="uid://o76dbkg8478j" path="res://shaders/001_change_color/change_color.tscn" id="4_ssrg0"]
+[ext_resource type="PackedScene" uid="uid://b2nxlaom04udy" path="res://shaders/003_color_and_position/color_and_position.tscn" id="5_tv25h"]
+[ext_resource type="PackedScene" uid="uid://dcrg7uyqekgl7" path="res://shaders/004_adding_time/adding_time.tscn" id="6_sjdpt"]
+[ext_resource type="PackedScene" uid="uid://du06a3dwu2yy6" path="res://shaders/005_displacing_vertices/displacing_vertices.tscn" id="7_3a3yj"]
+[ext_resource type="PackedScene" uid="uid://5clduk3kph4t" path="res://shaders/006_variables/variables.tscn" id="8_pbwds"]
+[ext_resource type="PackedScene" uid="uid://csh1kbx37l5el" path="res://shaders/007_reflections/reflections.tscn" id="9_vxv4a"]
+[ext_resource type="PackedScene" uid="uid://bjoxcmy6sy8lb" path="res://shaders/008_normals/normals.tscn" id="10_cqg4s"]
+[ext_resource type="PackedScene" uid="uid://c0c1k04qmog56" path="res://shaders/000_playground/playground.tscn" id="11_u0jti"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_37bgm"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_osijm"]
+sky_material = SubResource("ProceduralSkyMaterial_37bgm")
+
+[sub_resource type="Environment" id="Environment_gem6o"]
+background_mode = 2
+sky = SubResource("Sky_osijm")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hf2y8"]
+size = Vector2(100, 20)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_l71tc"]
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gem6o")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_hf2y8")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_l71tc")
+metadata/_edit_lock_ = true
+
+[node name="Viewer" parent="." instance=ExtResource("1_ann0f")]
+
+[node name="Examples" type="Node3D" parent="."]
+
+[node name="000Playground" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="Plinth" parent="Examples/000Playground" instance=ExtResource("3_hl5po")]
+title = "Playground"
+
+[node name="Playground" parent="Examples/000Playground" instance=ExtResource("11_u0jti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="001ChangeColor" type="Node3D" parent="Examples"]
+
+[node name="001ChangeColor" parent="Examples/001ChangeColor" instance=ExtResource("4_ssrg0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="Plinth" parent="Examples/001ChangeColor" instance=ExtResource("3_hl5po")]
+prefix = "001"
+title = "Change Color"
+
+[node name="002ChangePosition" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="Plinth" parent="Examples/002ChangePosition" instance=ExtResource("3_hl5po")]
+prefix = "002"
+title = "Change Position"
+
+[node name="ChangePosition" parent="Examples/002ChangePosition" instance=ExtResource("4_3haq7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="003ColorAndPosition" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Plinth" parent="Examples/003ColorAndPosition" instance=ExtResource("3_hl5po")]
+prefix = "003"
+title = "Color and Position"
+
+[node name="ColorAndPosition" parent="Examples/003ColorAndPosition" instance=ExtResource("5_tv25h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="004AddingTime" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Plinth" parent="Examples/004AddingTime" instance=ExtResource("3_hl5po")]
+prefix = "004"
+title = "Adding Time"
+
+[node name="AddingTime" parent="Examples/004AddingTime" instance=ExtResource("6_sjdpt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="005DisplacingVertices" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="Plinth" parent="Examples/005DisplacingVertices" instance=ExtResource("3_hl5po")]
+prefix = "005"
+title = "Displacing Vertices"
+
+[node name="DisplacingVertices" parent="Examples/005DisplacingVertices" instance=ExtResource("7_3a3yj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="006Variables" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="Plinth" parent="Examples/006Variables" instance=ExtResource("3_hl5po")]
+prefix = "006"
+title = "Variables"
+
+[node name="Variables" parent="Examples/006Variables" instance=ExtResource("8_pbwds")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="007Reflections" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+
+[node name="Plinth" parent="Examples/007Reflections" instance=ExtResource("3_hl5po")]
+prefix = "007"
+title = "Reflections"
+
+[node name="Reflections" parent="Examples/007Reflections" instance=ExtResource("9_vxv4a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="008Normals" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+
+[node name="Plinth" parent="Examples/008Normals" instance=ExtResource("3_hl5po")]
+prefix = "008"
+title = "Normals"
+
+[node name="Normals" parent="Examples/008Normals" instance=ExtResource("10_cqg4s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

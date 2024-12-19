@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://o76dbkg8478j"]
+
+[ext_resource type="Shader" path="res://shaders/001_change_color/change_color.gdshader" id="1_d0kbx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yrrhw"]
+render_priority = 0
+shader = ExtResource("1_d0kbx")
+
+[sub_resource type="SphereMesh" id="SphereMesh_16ni7"]
+material = SubResource("ShaderMaterial_yrrhw")
+
+[node name="ChangeColor" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_16ni7")

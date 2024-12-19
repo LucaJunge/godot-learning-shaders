@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2nxlaom04udy"]
+
+[ext_resource type="Shader" path="res://shaders/003_color_and_position/color_and_position.gdshader" id="1_igsbe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r8oyo"]
+render_priority = 0
+shader = ExtResource("1_igsbe")
+
+[sub_resource type="SphereMesh" id="SphereMesh_5deb6"]
+material = SubResource("ShaderMaterial_r8oyo")
+
+[node name="ColorAndPosition" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_5deb6")

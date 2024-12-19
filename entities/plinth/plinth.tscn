@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn6vxev7totc8"]
+
+[ext_resource type="PackedScene" uid="uid://rtbkmc0lc26v" path="res://assets/models/kenney.nl/column.glb" id="1_4464o"]
+[ext_resource type="Script" path="res://entities/plinth/plinth.gd" id="1_c0mgr"]
+[ext_resource type="FontFile" uid="uid://d268g1dy6fv6t" path="res://assets/fonts/FrederickatheGreat-Regular.ttf" id="2_kx7w3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aq2yi"]
+size = Vector3(0.91626, 1.34576, 0.744141)
+
+[node name="Plinth" type="StaticBody3D"]
+script = ExtResource("1_c0mgr")
+prefix = "000"
+title = "Title"
+
+[node name="PlinthModel" parent="." instance=ExtResource("1_4464o")]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.2, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.672333, 0)
+shape = SubResource("BoxShape3D_aq2yi")
+
+[node name="ExhibitTitle" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.21637, 0.378944)
+pixel_size = 0.0006
+modulate = Color(0.5475, 0.6015, 0.75, 1)
+outline_modulate = Color(0.152941, 0.176471, 0.25098, 1)
+text = "Title"
+font = ExtResource("2_kx7w3")
+font_size = 128
+autowrap_mode = 2
+width = 1200.0
+
+[node name="ExhibitNumber" type="Label3D" parent="."]
+transform = Transform3D(0.777146, 0, -0.62932, 0, 1, 0, 0.62932, 0, 0.777146, -0.403741, 1.28391, 0.32542)
+pixel_size = 0.0004
+modulate = Color(0.5475, 0.6015, 0.75, 1)
+outline_modulate = Color(0.152941, 0.176471, 0.25098, 1)
+text = "000"
+font = ExtResource("2_kx7w3")
+font_size = 128
+autowrap_mode = 2
+width = 1200.0

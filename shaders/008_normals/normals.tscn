@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjoxcmy6sy8lb"]
+
+[ext_resource type="Shader" path="res://shaders/008_normals/normals.gdshader" id="1_bpfbn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktxik"]
+render_priority = 0
+shader = ExtResource("1_bpfbn")
+
+[sub_resource type="SphereMesh" id="SphereMesh_288vy"]
+material = SubResource("ShaderMaterial_ktxik")
+
+[node name="Normals" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_288vy")

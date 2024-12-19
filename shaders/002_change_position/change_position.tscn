@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm381ddsm6nv3"]
+
+[ext_resource type="Shader" path="res://shaders/002_change_position/change_position.gdshader" id="1_milct"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q2e1w"]
+render_priority = 0
+shader = ExtResource("1_milct")
+
+[sub_resource type="SphereMesh" id="SphereMesh_f3uhw"]
+material = SubResource("ShaderMaterial_q2e1w")
+
+[node name="ChangePosition" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_f3uhw")
