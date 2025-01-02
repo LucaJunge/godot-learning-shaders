@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcsb32y37da3f"]
+
+[ext_resource type="Shader" path="res://shaders/009_fresnel/fresnel.gdshader" id="1_dvfmg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t4a8f"]
+render_priority = 0
+shader = ExtResource("1_dvfmg")
+shader_parameter/base_color = Color(0.173, 0.731, 0.541, 1)
+shader_parameter/fresnel_color = Color(0.887, 0, 1, 1)
+shader_parameter/fresnel_strength = 3.0
+shader_parameter/fresnel_amount = 3.6
+
+[sub_resource type="SphereMesh" id="SphereMesh_pr1ms"]
+material = SubResource("ShaderMaterial_t4a8f")
+
+[node name="Fresnel" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_pr1ms")

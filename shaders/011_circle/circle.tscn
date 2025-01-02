@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjcfr8tqdhbro"]
+
+[ext_resource type="Shader" path="res://shaders/011_circle/circle.gdshader" id="1_omahb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iu8hm"]
+render_priority = 0
+shader = ExtResource("1_omahb")
+
+[sub_resource type="QuadMesh" id="QuadMesh_md0p6"]
+material = SubResource("ShaderMaterial_iu8hm")
+
+[node name="Circle" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_md0p6")

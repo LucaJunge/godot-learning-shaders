@@ -8,9 +8,6 @@ extends Node3D
 
 @onready var shader_material = $MeshInstance3D.mesh.material
 
-func _ready() -> void:
-	print(shader_material)
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

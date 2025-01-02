@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://xiyknqrsrmws"]
+[gd_scene load_steps=23 format=3 uid="uid://xiyknqrsrmws"]
 
 [ext_resource type="PackedScene" uid="uid://dcv8xw0aeturp" path="res://entities/viewer/viewer.tscn" id="1_ann0f"]
 [ext_resource type="PackedScene" uid="uid://bn6vxev7totc8" path="res://entities/plinth/plinth.tscn" id="3_hl5po"]
@@ -11,6 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://csh1kbx37l5el" path="res://shaders/007_reflections/reflections.tscn" id="9_vxv4a"]
 [ext_resource type="PackedScene" uid="uid://bjoxcmy6sy8lb" path="res://shaders/008_normals/normals.tscn" id="10_cqg4s"]
 [ext_resource type="PackedScene" uid="uid://c0c1k04qmog56" path="res://shaders/000_playground/playground.tscn" id="11_u0jti"]
+[ext_resource type="FontFile" uid="uid://d268g1dy6fv6t" path="res://assets/fonts/FrederickatheGreat-Regular.ttf" id="12_mj3dk"]
+[ext_resource type="PackedScene" uid="uid://bcsb32y37da3f" path="res://shaders/009_fresnel/fresnel.tscn" id="12_mx7ux"]
+[ext_resource type="PackedScene" uid="uid://drgqrnj1otb25" path="res://shaders/010_outline/outline.tscn" id="13_3375a"]
+[ext_resource type="Script" path="res://openxr.gd" id="15_a8hdi"]
+[ext_resource type="PackedScene" uid="uid://cjcfr8tqdhbro" path="res://shaders/011_circle/circle.tscn" id="15_dijaw"]
+[ext_resource type="PackedScene" uid="uid://2o8nbxn0x7of" path="res://shaders/012_polygon/polygon.tscn" id="16_j3uxc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_37bgm"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -22,6 +28,7 @@ sky_material = SubResource("ProceduralSkyMaterial_37bgm")
 [sub_resource type="Environment" id="Environment_gem6o"]
 background_mode = 2
 sky = SubResource("Sky_osijm")
+ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 2
 glow_enabled = true
 
@@ -33,6 +40,7 @@ size = Vector2(100, 20)
 [node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
 environment = SubResource("Environment_gem6o")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -51,6 +59,7 @@ shape = SubResource("WorldBoundaryShape3D_l71tc")
 metadata/_edit_lock_ = true
 
 [node name="Viewer" parent="." instance=ExtResource("1_ann0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.6964, 0, 2.84986)
 
 [node name="Examples" type="Node3D" parent="."]
 
@@ -141,3 +150,102 @@ title = "Normals"
 
 [node name="Normals" parent="Examples/008Normals" instance=ExtResource("10_cqg4s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="EffectsLabel" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 1, 0)
+
+[node name="EffectsLabel3D" type="Label3D" parent="Examples/EffectsLabel"]
+pixel_size = 0.003
+billboard = 1
+modulate = Color(0.54902, 0.6, 0.74902, 1)
+outline_modulate = Color(0.152941, 0.176471, 0.25098, 1)
+text = "EFFECTS"
+font = ExtResource("12_mj3dk")
+font_size = 128
+
+[node name="EffectsArrowLabel3D" type="Label3D" parent="Examples/EffectsLabel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+pixel_size = 0.003
+modulate = Color(0.54902, 0.6, 0.74902, 1)
+outline_modulate = Color(0.152941, 0.176471, 0.25098, 1)
+text = "--->"
+font = ExtResource("12_mj3dk")
+font_size = 128
+
+[node name="ShapesLabel" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 1, -4)
+
+[node name="ShapesLabel3D" type="Label3D" parent="Examples/ShapesLabel"]
+pixel_size = 0.003
+billboard = 1
+modulate = Color(0.54902, 0.6, 0.74902, 1)
+outline_modulate = Color(0.152941, 0.176471, 0.25098, 1)
+text = "SHAPES"
+font = ExtResource("12_mj3dk")
+font_size = 128
+
+[node name="ShapesArrowLabel3D" type="Label3D" parent="Examples/ShapesLabel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+pixel_size = 0.003
+modulate = Color(0.54902, 0.6, 0.74902, 1)
+outline_modulate = Color(0.152941, 0.176471, 0.25098, 1)
+text = "--->"
+font = ExtResource("12_mj3dk")
+font_size = 128
+
+[node name="009Fresnel" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="Plinth" parent="Examples/009Fresnel" instance=ExtResource("3_hl5po")]
+title = "Fresnel"
+
+[node name="Fresnel" parent="Examples/009Fresnel" instance=ExtResource("12_mx7ux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="010Outline" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 0)
+
+[node name="Plinth" parent="Examples/010Outline" instance=ExtResource("3_hl5po")]
+prefix = "010"
+title = "Outline"
+
+[node name="Outline" parent="Examples/010Outline" instance=ExtResource("13_3375a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="011Circle" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -4)
+
+[node name="Plinth" parent="Examples/011Circle" instance=ExtResource("3_hl5po")]
+prefix = "011"
+title = "Circle"
+
+[node name="Circle" parent="Examples/011Circle" instance=ExtResource("15_dijaw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="012Polygon" type="Node3D" parent="Examples"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -4)
+
+[node name="Plinth" parent="Examples/012Polygon" instance=ExtResource("3_hl5po")]
+prefix = "012"
+title = "Polygon"
+
+[node name="Polygon" parent="Examples/012Polygon" instance=ExtResource("16_j3uxc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="013Rectangles" type="Node3D" parent="Examples"]
+
+[node name="Plinth" parent="Examples/013Rectangles" instance=ExtResource("3_hl5po")]
+
+[node name="OpenXR" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("15_a8hdi")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
