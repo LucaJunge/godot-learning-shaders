@@ -4,6 +4,16 @@ extends StaticBody3D
 @onready var exhibit_title: Label3D = $ExhibitTitle
 @onready var exhibit_number: Label3D = $ExhibitNumber
 
+var current_exhibit: Node = null
+
+@export_group("Exhibit Settings")
+@export var exhibit: PackedScene:
+	get:
+		return exhibit
+	set(value):
+		exhibit = value
+		set_exhibit()
+
 @export var prefix: String:
 	get:
 		return prefix
@@ -27,3 +37,14 @@ func set_label3d():
 		if not prefix.is_empty() and not title.is_empty():
 			exhibit_title.text = title
 			exhibit_number.text = prefix
+
+func set_exhibit():
+	# remove the old exhibit if present
+	if current_exhibit:
+		remove_child(current_exhibit)
+		
+	if exhibit != null:
+		var scene_node = exhibit.instantiate()
+		scene_node.position.y = 2
+		current_exhibit = scene_node
+		add_child(scene_node)

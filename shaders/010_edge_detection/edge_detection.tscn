@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://drgqrnj1otb25"]
+
+[ext_resource type="Shader" path="res://shaders/010_edge_detection/edge_detection.gdshader" id="1_34hnr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vbj21"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wnbfj"]
+material = SubResource("ShaderMaterial_vbj21")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_855vq"]
+render_priority = 0
+shader = ExtResource("1_34hnr")
+
+[sub_resource type="QuadMesh" id="QuadMesh_sbqxy"]
+size = Vector2(1.6, 2)
+
+[node name="EdgeDetection" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_wnbfj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.322139, 0.653597)
+material_override = SubResource("ShaderMaterial_855vq")
+mesh = SubResource("QuadMesh_sbqxy")

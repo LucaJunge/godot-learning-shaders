@@ -9,6 +9,7 @@ size = Vector3(0.91626, 1.34576, 0.744141)
 
 [node name="Plinth" type="StaticBody3D"]
 script = ExtResource("1_c0mgr")
+exhibit_position = Vector3(0, 0, 0)
 prefix = "000"
 title = "Title"
 

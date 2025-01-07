@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://eh06d5qto3hu"]
+
+[ext_resource type="Shader" path="res://shaders/014_depth/depth.gdshader" id="1_bci2g"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_46g6r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_to4o0"]
+render_priority = 0
+shader = ExtResource("1_bci2g")
+shader_parameter/depth_factor = 80.0
+shader_parameter/pow_factor = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_xgf2h"]
+material = SubResource("ShaderMaterial_to4o0")
+size = Vector2(1.6, 2)
+
+[node name="Depth" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_46g6r")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.322139, 0.653597)
+mesh = SubResource("QuadMesh_xgf2h")
+metadata/_edit_lock_ = true

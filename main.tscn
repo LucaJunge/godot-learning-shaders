@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://xiyknqrsrmws"]
+[gd_scene load_steps=28 format=3 uid="uid://xiyknqrsrmws"]
 
 [ext_resource type="PackedScene" uid="uid://dcv8xw0aeturp" path="res://entities/viewer/viewer.tscn" id="1_ann0f"]
 [ext_resource type="PackedScene" uid="uid://bn6vxev7totc8" path="res://entities/plinth/plinth.tscn" id="3_hl5po"]
@@ -13,10 +13,15 @@
 [ext_resource type="PackedScene" uid="uid://c0c1k04qmog56" path="res://shaders/000_playground/playground.tscn" id="11_u0jti"]
 [ext_resource type="FontFile" uid="uid://d268g1dy6fv6t" path="res://assets/fonts/FrederickatheGreat-Regular.ttf" id="12_mj3dk"]
 [ext_resource type="PackedScene" uid="uid://bcsb32y37da3f" path="res://shaders/009_fresnel/fresnel.tscn" id="12_mx7ux"]
-[ext_resource type="PackedScene" uid="uid://drgqrnj1otb25" path="res://shaders/010_outline/outline.tscn" id="13_3375a"]
+[ext_resource type="PackedScene" uid="uid://drgqrnj1otb25" path="res://shaders/010_edge_detection/edge_detection.tscn" id="13_3375a"]
 [ext_resource type="Script" path="res://openxr.gd" id="15_a8hdi"]
 [ext_resource type="PackedScene" uid="uid://cjcfr8tqdhbro" path="res://shaders/011_circle/circle.tscn" id="15_dijaw"]
 [ext_resource type="PackedScene" uid="uid://2o8nbxn0x7of" path="res://shaders/012_polygon/polygon.tscn" id="16_j3uxc"]
+[ext_resource type="PackedScene" uid="uid://eh06d5qto3hu" path="res://shaders/014_depth/depth.tscn" id="18_pt3p3"]
+[ext_resource type="PackedScene" uid="uid://omdbnbi707f8" path="res://shaders/016_line/line.tscn" id="19_2f6ea"]
+[ext_resource type="PackedScene" uid="uid://dbevfrw75c0lf" path="res://shaders/017_blur/blur.tscn" id="20_qkyju"]
+[ext_resource type="PackedScene" uid="uid://dpt0jm6fe6iy" path="res://shaders/018_black_hole/BlackHole.tscn" id="21_8umyp"]
+[ext_resource type="PackedScene" uid="uid://83u6swv86t81" path="res://assets/models/own/monstree.glb" id="22_36auf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_37bgm"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -39,6 +44,10 @@ size = Vector2(100, 20)
 
 [node name="Main" type="Node3D"]
 
+[node name="OpenXR" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("15_a8hdi")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 unique_name_in_owner = true
 environment = SubResource("Environment_gem6o")
@@ -58,101 +67,79 @@ metadata/_edit_lock_ = true
 shape = SubResource("WorldBoundaryShape3D_l71tc")
 metadata/_edit_lock_ = true
 
+[node name="monstree" parent="." instance=ExtResource("22_36auf")]
+transform = Transform3D(-2.18557e-07, 0, 5, 0, 5, 0, -5, 0, -2.18557e-07, 27.4705, -6.36274, -6.36762)
+
 [node name="Viewer" parent="." instance=ExtResource("1_ann0f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.6964, 0, 2.84986)
 
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+
 [node name="Examples" type="Node3D" parent="."]
 
-[node name="000Playground" type="Node3D" parent="Examples"]
+[node name="000Playground" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
-
-[node name="Plinth" parent="Examples/000Playground" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("11_u0jti")
 title = "Playground"
 
-[node name="Playground" parent="Examples/000Playground" instance=ExtResource("11_u0jti")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="001ChangeColor" type="Node3D" parent="Examples"]
-
-[node name="001ChangeColor" parent="Examples/001ChangeColor" instance=ExtResource("4_ssrg0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="Plinth" parent="Examples/001ChangeColor" instance=ExtResource("3_hl5po")]
+[node name="001ChangeColor" parent="Examples" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("4_ssrg0")
 prefix = "001"
 title = "Change Color"
 
-[node name="002ChangePosition" type="Node3D" parent="Examples"]
+[node name="002ChangePosition" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-
-[node name="Plinth" parent="Examples/002ChangePosition" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("4_3haq7")
 prefix = "002"
 title = "Change Position"
 
-[node name="ChangePosition" parent="Examples/002ChangePosition" instance=ExtResource("4_3haq7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="003ColorAndPosition" type="Node3D" parent="Examples"]
+[node name="003ColorAndPosition" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-
-[node name="Plinth" parent="Examples/003ColorAndPosition" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("5_tv25h")
 prefix = "003"
 title = "Color and Position"
 
-[node name="ColorAndPosition" parent="Examples/003ColorAndPosition" instance=ExtResource("5_tv25h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="004AddingTime" type="Node3D" parent="Examples"]
+[node name="004AddingTime" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
-
-[node name="Plinth" parent="Examples/004AddingTime" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("6_sjdpt")
 prefix = "004"
 title = "Adding Time"
 
-[node name="AddingTime" parent="Examples/004AddingTime" instance=ExtResource("6_sjdpt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="005DisplacingVertices" type="Node3D" parent="Examples"]
+[node name="005DisplacingVertices" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
-
-[node name="Plinth" parent="Examples/005DisplacingVertices" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("7_3a3yj")
 prefix = "005"
 title = "Displacing Vertices"
 
-[node name="DisplacingVertices" parent="Examples/005DisplacingVertices" instance=ExtResource("7_3a3yj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="006Variables" type="Node3D" parent="Examples"]
+[node name="006Variables" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
-
-[node name="Plinth" parent="Examples/006Variables" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("8_pbwds")
 prefix = "006"
 title = "Variables"
 
-[node name="Variables" parent="Examples/006Variables" instance=ExtResource("8_pbwds")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="007Reflections" type="Node3D" parent="Examples"]
+[node name="007Reflections" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
-
-[node name="Plinth" parent="Examples/007Reflections" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("9_vxv4a")
 prefix = "007"
 title = "Reflections"
 
-[node name="Reflections" parent="Examples/007Reflections" instance=ExtResource("9_vxv4a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="008Normals" type="Node3D" parent="Examples"]
+[node name="008Normals" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
-
-[node name="Plinth" parent="Examples/008Normals" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("10_cqg4s")
 prefix = "008"
 title = "Normals"
 
-[node name="Normals" parent="Examples/008Normals" instance=ExtResource("10_cqg4s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
 [node name="EffectsLabel" type="Node3D" parent="Examples"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 1, 0)
+metadata/_edit_lock_ = true
 
 [node name="EffectsLabel3D" type="Label3D" parent="Examples/EffectsLabel"]
 pixel_size = 0.003
@@ -174,6 +161,7 @@ font_size = 128
 
 [node name="ShapesLabel" type="Node3D" parent="Examples"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 1, -4)
+metadata/_edit_lock_ = true
 
 [node name="ShapesLabel3D" type="Label3D" parent="Examples/ShapesLabel"]
 pixel_size = 0.003
@@ -193,59 +181,48 @@ text = "--->"
 font = ExtResource("12_mj3dk")
 font_size = 128
 
-[node name="009Fresnel" type="Node3D" parent="Examples"]
+[node name="009Fresnel" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
-
-[node name="Plinth" parent="Examples/009Fresnel" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("12_mx7ux")
+prefix = "009"
 title = "Fresnel"
 
-[node name="Fresnel" parent="Examples/009Fresnel" instance=ExtResource("12_mx7ux")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="010Outline" type="Node3D" parent="Examples"]
+[node name="010EdgeDetection" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 0)
-
-[node name="Plinth" parent="Examples/010Outline" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("13_3375a")
 prefix = "010"
-title = "Outline"
+title = "Edge Detection"
 
-[node name="Outline" parent="Examples/010Outline" instance=ExtResource("13_3375a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="011Circle" type="Node3D" parent="Examples"]
+[node name="011Circle" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -4)
-
-[node name="Plinth" parent="Examples/011Circle" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("15_dijaw")
 prefix = "011"
 title = "Circle"
 
-[node name="Circle" parent="Examples/011Circle" instance=ExtResource("15_dijaw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="012Polygon" type="Node3D" parent="Examples"]
+[node name="012Polygon" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -4)
-
-[node name="Plinth" parent="Examples/012Polygon" instance=ExtResource("3_hl5po")]
+exhibit = ExtResource("16_j3uxc")
 prefix = "012"
 title = "Polygon"
 
-[node name="Polygon" parent="Examples/012Polygon" instance=ExtResource("16_j3uxc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+[node name="014Depth" parent="Examples" instance=ExtResource("3_hl5po")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+exhibit = ExtResource("18_pt3p3")
+prefix = "014"
+title = "Depth"
 
-[node name="013Rectangles" type="Node3D" parent="Examples"]
+[node name="016Line" parent="Examples" instance=ExtResource("3_hl5po")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 0)
+exhibit = ExtResource("19_2f6ea")
+prefix = "016"
+title = "Line"
 
-[node name="Plinth" parent="Examples/013Rectangles" instance=ExtResource("3_hl5po")]
+[node name="017Blur" parent="Examples" instance=ExtResource("3_hl5po")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 0)
+exhibit = ExtResource("20_qkyju")
+prefix = "017"
+title = "Blur"
 
-[node name="OpenXR" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("15_a8hdi")
-
-[node name="XROrigin3D" type="XROrigin3D" parent="."]
-
-[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
-
-[node name="LeftHand" type="XRController3D" parent="XROrigin3D"]
-tracker = &"left_hand"
-
-[node name="RightHand" type="XRController3D" parent="XROrigin3D"]
-tracker = &"right_hand"
+[node name="018BlackHole" parent="Examples" instance=ExtResource("3_hl5po")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.505, 0, -7.17165)
+exhibit = ExtResource("21_8umyp")
