@@ -7,11 +7,12 @@
 [sub_resource type="SphereMesh" id="SphereMesh_wnbfj"]
 material = SubResource("ShaderMaterial_vbj21")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_855vq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vn7ob"]
 render_priority = 0
 shader = ExtResource("1_34hnr")
 
 [sub_resource type="QuadMesh" id="QuadMesh_sbqxy"]
+material = SubResource("ShaderMaterial_vn7ob")
 size = Vector2(1.6, 2)
 
 [node name="EdgeDetection" type="Node3D"]
@@ -21,5 +22,4 @@ mesh = SubResource("SphereMesh_wnbfj")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.322139, 0.653597)
-material_override = SubResource("ShaderMaterial_855vq")
 mesh = SubResource("QuadMesh_sbqxy")

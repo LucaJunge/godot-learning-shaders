@@ -1,27 +1,44 @@
-[gd_scene load_steps=28 format=3 uid="uid://xiyknqrsrmws"]
+[gd_scene load_steps=45 format=3 uid="uid://xiyknqrsrmws"]
 
 [ext_resource type="PackedScene" uid="uid://dcv8xw0aeturp" path="res://entities/viewer/viewer.tscn" id="1_ann0f"]
 [ext_resource type="PackedScene" uid="uid://bn6vxev7totc8" path="res://entities/plinth/plinth.tscn" id="3_hl5po"]
 [ext_resource type="PackedScene" uid="uid://bm381ddsm6nv3" path="res://shaders/002_change_position/change_position.tscn" id="4_3haq7"]
 [ext_resource type="PackedScene" uid="uid://o76dbkg8478j" path="res://shaders/001_change_color/change_color.tscn" id="4_ssrg0"]
 [ext_resource type="PackedScene" uid="uid://b2nxlaom04udy" path="res://shaders/003_color_and_position/color_and_position.tscn" id="5_tv25h"]
+[ext_resource type="Shader" path="res://shaders/000_playground/playground.gdshader" id="6_cymm7"]
 [ext_resource type="PackedScene" uid="uid://dcrg7uyqekgl7" path="res://shaders/004_adding_time/adding_time.tscn" id="6_sjdpt"]
 [ext_resource type="PackedScene" uid="uid://du06a3dwu2yy6" path="res://shaders/005_displacing_vertices/displacing_vertices.tscn" id="7_3a3yj"]
 [ext_resource type="PackedScene" uid="uid://5clduk3kph4t" path="res://shaders/006_variables/variables.tscn" id="8_pbwds"]
+[ext_resource type="Shader" path="res://shaders/001_change_color/change_color.gdshader" id="8_qie20"]
 [ext_resource type="PackedScene" uid="uid://csh1kbx37l5el" path="res://shaders/007_reflections/reflections.tscn" id="9_vxv4a"]
 [ext_resource type="PackedScene" uid="uid://bjoxcmy6sy8lb" path="res://shaders/008_normals/normals.tscn" id="10_cqg4s"]
+[ext_resource type="Shader" path="res://shaders/002_change_position/change_position.gdshader" id="10_yg0qk"]
 [ext_resource type="PackedScene" uid="uid://c0c1k04qmog56" path="res://shaders/000_playground/playground.tscn" id="11_u0jti"]
+[ext_resource type="Shader" path="res://shaders/003_color_and_position/color_and_position.gdshader" id="12_ddch0"]
 [ext_resource type="FontFile" uid="uid://d268g1dy6fv6t" path="res://assets/fonts/FrederickatheGreat-Regular.ttf" id="12_mj3dk"]
 [ext_resource type="PackedScene" uid="uid://bcsb32y37da3f" path="res://shaders/009_fresnel/fresnel.tscn" id="12_mx7ux"]
 [ext_resource type="PackedScene" uid="uid://drgqrnj1otb25" path="res://shaders/010_edge_detection/edge_detection.tscn" id="13_3375a"]
+[ext_resource type="Shader" path="res://shaders/004_adding_time/adding_time.gdshader" id="14_eefow"]
 [ext_resource type="Script" path="res://openxr.gd" id="15_a8hdi"]
 [ext_resource type="PackedScene" uid="uid://cjcfr8tqdhbro" path="res://shaders/011_circle/circle.tscn" id="15_dijaw"]
 [ext_resource type="PackedScene" uid="uid://2o8nbxn0x7of" path="res://shaders/012_polygon/polygon.tscn" id="16_j3uxc"]
+[ext_resource type="Shader" path="res://shaders/005_displacing_vertices/displacing_vertices.gdshader" id="16_t704p"]
+[ext_resource type="Shader" path="res://shaders/006_variables/variables.gdshader" id="18_d1g1f"]
 [ext_resource type="PackedScene" uid="uid://eh06d5qto3hu" path="res://shaders/014_depth/depth.tscn" id="18_pt3p3"]
 [ext_resource type="PackedScene" uid="uid://omdbnbi707f8" path="res://shaders/016_line/line.tscn" id="19_2f6ea"]
+[ext_resource type="Shader" path="res://shaders/007_reflections/reflections.gdshader" id="20_bodvo"]
 [ext_resource type="PackedScene" uid="uid://dbevfrw75c0lf" path="res://shaders/017_blur/blur.tscn" id="20_qkyju"]
 [ext_resource type="PackedScene" uid="uid://dpt0jm6fe6iy" path="res://shaders/018_black_hole/BlackHole.tscn" id="21_8umyp"]
 [ext_resource type="PackedScene" uid="uid://83u6swv86t81" path="res://assets/models/own/monstree.glb" id="22_36auf"]
+[ext_resource type="Shader" path="res://shaders/008_normals/normals.gdshader" id="22_b7g71"]
+[ext_resource type="Shader" path="res://shaders/009_fresnel/fresnel.gdshader" id="25_u1eko"]
+[ext_resource type="Shader" path="res://shaders/010_edge_detection/edge_detection.gdshader" id="27_d74j0"]
+[ext_resource type="Shader" path="res://shaders/011_circle/circle.gdshader" id="28_4mfq0"]
+[ext_resource type="Shader" path="res://shaders/012_polygon/polygon.gdshader" id="30_j18a4"]
+[ext_resource type="Shader" path="res://shaders/014_depth/depth.gdshader" id="32_o3xri"]
+[ext_resource type="Shader" path="res://shaders/016_line/line.gdshader" id="33_ggrs5"]
+[ext_resource type="Shader" path="res://shaders/018_black_hole/BlackHole.gdshader" id="36_77egu"]
+[ext_resource type="Shader" path="res://shaders/017_blur/blur.gdshader" id="36_mb0t6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_37bgm"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -89,53 +106,62 @@ tracker = &"right_hand"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 exhibit = ExtResource("11_u0jti")
 title = "Playground"
+shader_file = ExtResource("6_cymm7")
 
 [node name="001ChangeColor" parent="Examples" instance=ExtResource("3_hl5po")]
 exhibit = ExtResource("4_ssrg0")
 prefix = "001"
 title = "Change Color"
+shader_file = ExtResource("8_qie20")
 
 [node name="002ChangePosition" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 exhibit = ExtResource("4_3haq7")
 prefix = "002"
 title = "Change Position"
+shader_file = ExtResource("10_yg0qk")
 
 [node name="003ColorAndPosition" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 exhibit = ExtResource("5_tv25h")
 prefix = "003"
 title = "Color and Position"
+shader_file = ExtResource("12_ddch0")
 
 [node name="004AddingTime" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 exhibit = ExtResource("6_sjdpt")
 prefix = "004"
 title = "Adding Time"
+shader_file = ExtResource("14_eefow")
 
 [node name="005DisplacingVertices" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 exhibit = ExtResource("7_3a3yj")
 prefix = "005"
 title = "Displacing Vertices"
+shader_file = ExtResource("16_t704p")
 
 [node name="006Variables" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 exhibit = ExtResource("8_pbwds")
 prefix = "006"
 title = "Variables"
+shader_file = ExtResource("18_d1g1f")
 
 [node name="007Reflections" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
 exhibit = ExtResource("9_vxv4a")
 prefix = "007"
 title = "Reflections"
+shader_file = ExtResource("20_bodvo")
 
 [node name="008Normals" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
 exhibit = ExtResource("10_cqg4s")
 prefix = "008"
 title = "Normals"
+shader_file = ExtResource("22_b7g71")
 
 [node name="EffectsLabel" type="Node3D" parent="Examples"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 1, 0)
@@ -186,43 +212,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
 exhibit = ExtResource("12_mx7ux")
 prefix = "009"
 title = "Fresnel"
+shader_file = ExtResource("25_u1eko")
 
 [node name="010EdgeDetection" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 0)
 exhibit = ExtResource("13_3375a")
 prefix = "010"
 title = "Edge Detection"
+shader_file = ExtResource("27_d74j0")
 
 [node name="011Circle" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -4)
 exhibit = ExtResource("15_dijaw")
 prefix = "011"
 title = "Circle"
+shader_file = ExtResource("28_4mfq0")
 
 [node name="012Polygon" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -4)
 exhibit = ExtResource("16_j3uxc")
 prefix = "012"
 title = "Polygon"
+shader_file = ExtResource("30_j18a4")
 
 [node name="014Depth" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
 exhibit = ExtResource("18_pt3p3")
 prefix = "014"
 title = "Depth"
+shader_file = ExtResource("32_o3xri")
 
 [node name="016Line" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 0)
 exhibit = ExtResource("19_2f6ea")
 prefix = "016"
 title = "Line"
+shader_file = ExtResource("33_ggrs5")
 
 [node name="017Blur" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 0, 0)
 exhibit = ExtResource("20_qkyju")
 prefix = "017"
 title = "Blur"
+shader_file = ExtResource("36_mb0t6")
 
 [node name="018BlackHole" parent="Examples" instance=ExtResource("3_hl5po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.505, 0, -7.17165)
 exhibit = ExtResource("21_8umyp")
+shader_file = ExtResource("36_77egu")
